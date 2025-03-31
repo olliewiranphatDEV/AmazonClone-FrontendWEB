@@ -2,7 +2,6 @@
 
 A fully functional e-commerce platform inspired by Amazon. Built with modern technologies including React.js, Node.js, Express.js, Prisma, and PostgreSQL, this clone features user authentication, product listings, shopping cart, Stripe payment integration, and an admin dashboard.
 
-``` ------------------------------------------------------------------------------ ```
 ## Features
 
 - Authentication (Sign up, Sign in, Clerk Integration)
@@ -73,12 +72,12 @@ npm install
 
 Create .env files in both client and server directories.
 
-# Example .env for Backend:
+## Example .env for Backend:
 DATABASE_URL=your_mysql_url
 STRIPE_SECRET_KEY=your_stripe_secret_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 
-# Example .env for Frontend:
+## Example .env for Frontend:
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 
 # 4. Run the Application
@@ -100,8 +99,8 @@ npm run dev
 Visit http://localhost:5173 in your browser.
 
 
-📁 Project Structure
-
+## Project Structure
+``` bash
 /amazon-clone
 ├── /client          # React frontend
 │   ├── /src
@@ -113,12 +112,13 @@ Visit http://localhost:5173 in your browser.
 │   └── index.js
 ├── README.md
 └── .gitignore
+```
 
-## License
+# License
 
 This project is licensed under the MIT License.
 
-## Acknowledgements
+# Acknowledgements
 
 Inspired by Amazon.com
 
