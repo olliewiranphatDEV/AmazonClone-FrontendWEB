@@ -1,0 +1,63 @@
+import { useState, useEffect, useRef } from 'react';
+
+const RotatingArrow = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+  
+  const toggleArrow = () => {
+    setIsOpen(!isOpen);
+  };
+  
+  useEffect(() => {
+    // ฟังก์ชันสำหรับจัดการการคลิกทั่วทั้งหน้าเว็บ
+    const handleClickOutside = (event) => {
+      // ถ้าคลิกข้างนอก container ให้ปิด dropdown
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    
+    // เพิ่ม event listener เมื่อ component ถูกแสดง
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    // cleanup function - ลบ event listener เมื่อ component ถูกทำลาย
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-8" ref={containerRef}>
+      <button 
+        onClick={toggleArrow}
+        className="flex items-center justify-between w-full text-gray-700 focus:outline-none"
+      >
+        <span className="text-lg font-medium">คลิกที่นี่เพื่อดูเพิ่มเติม</span>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className={`h-5 w-5 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      
+      {/* เปลี่ยนเป็นแสดง div เสมอ แต่ใช้ CSS คลาสเพื่อควบคุมความสูงและการมองเห็น */}
+      <div 
+        className={`mt-4 bg-gray-50 rounded overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen 
+            ? 'max-h-40 opacity-100 p-3' 
+            : 'max-h-0 opacity-0 p-0'
+        }`}
+      >
+        <div className="text-gray-600">
+          นี่คือเนื้อหาที่ซ่อนอยู่ จะค่อยๆ โผล่ออกมาเมื่อคลิกที่ลูกศร และจะหายไปเมื่อคลิกที่ส่วนอื่นของหน้าเว็บ
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RotatingArrow;
