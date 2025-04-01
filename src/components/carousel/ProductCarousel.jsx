@@ -23,7 +23,7 @@ const ProductCarousel = ({ title, data = [] }) => {
                 }}
 
             >
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                     <SwiperSlide key={index}>
                         <div className="flex flex-col items-center text-center group cursor-pointer">
 

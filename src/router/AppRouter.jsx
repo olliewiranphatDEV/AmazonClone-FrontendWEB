@@ -18,7 +18,6 @@ import UpdateProduct from '../pages/sellerPages/sub-products/UpdateProduct'
 import OrdersRevenue from '../pages/sellerPages/OrdersRevenue'
 import SearchRelatedProduct from '../pages/pucblicPages/SearchRelatedProduct'
 import ProductDetail from '../pages/pucblicPages/ProductDetail'
-import Orderpayment from '../pages/userPages/Orderpayment'
 import AllCategories from '../pages/adminPages/AllCategories'
 import AllSellers from '../pages/adminPages/AllSellers'
 import Payment from '../pages/userPages/Payment'
@@ -42,7 +41,6 @@ function AppRouter() {
                     <Route index element={<HomePage />} />
                     <Route path='update-account' element={<UserAccount />} />
                     <Route path='order-history' element={<OrderHistory />} />
-                    <Route path='order/payment' element={<Orderpayment />} />
                     <Route path='cart' element={<Cart />} />
                     {/* ORDER link to /user/payment */}
 
