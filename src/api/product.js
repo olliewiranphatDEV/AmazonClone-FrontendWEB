@@ -1,13 +1,14 @@
 import axios from "axios"
+const BASE_URL = import.meta.env.VITE_API_URL
 
 export const getMyProducts = async (token, userID) => {
-    return await axios(`http://localhost:8080/seller-center/products/all-products/${userID}`, {
+    return await axios(`${BASE_URL}/seller-center/products/all-products/${userID}`, {
         headers: { Authorization: `Bearer ${token}` }
     })
 }
 
 export const updateProductID = async (token, productID, data) => {
-    return await axios.put(`http://localhost:8080/seller-center/products/update-product/${productID}`, data, {
+    return await axios.put(`${BASE_URL}/seller-center/products/update-product/${productID}`, data, {
         headers: { Authorization: `Bearer ${token}` }
     })
 }
@@ -16,7 +17,7 @@ export const updateProductID = async (token, productID, data) => {
 
 
 export const deleteProductID = async (token, productID) => {
-    return await axios.delete(`http://localhost:8080/seller-center/products/delete-product/${productID}`, {
+    return await axios.delete(`${BASE_URL}/seller-center/products/delete-product/${productID}`, {
         headers: { Authorization: `Bearer ${token}` }
     })
 }
@@ -24,7 +25,7 @@ export const deleteProductID = async (token, productID) => {
 
 ///// for Centric HOME :
 export const getAllProductDB = async () => {
-    return await axios('http://localhost:8080/admin/management/all-products')
+    return await axios(`${BASE_URL}/admin/management/all-products`)
 }
 
 
@@ -43,5 +44,5 @@ export const searchProducts = async (categoryID, search) => {
     if (categoryID) params.append("categoryID", categoryID);
     if (search) params.append("search", search);
 
-    return await axios(`http://localhost:8080/user/search-products?${params.toString()}`);
+    return await axios(`${BASE_URL}/user/search-products?${params.toString()}`);
 };
