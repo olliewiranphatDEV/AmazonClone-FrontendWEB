@@ -21,9 +21,6 @@ export const getMyAccount = async (token) => {
 }
 
 
-
-
-
 export const updateImageAccount = async (token, imageUrl) => {
     return await axios.patch(`${BASE_URL}/user/update-image-account`, imageUrl, {
         headers: {
