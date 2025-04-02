@@ -5,6 +5,7 @@ import useProductStore from '../../../store/ProductStore'
 import useAuthStore from '../../../store/UserStore'
 
 function AddToCart({ thisProduct, pickQuantity }) {
+    const actionGetMyAccount = useAuthStore(state => state.actionGetMyAccounts)
     const userData = useAuthStore(state => state.userData)
 
     const actionADDtoCarts = useProductStore(state => state.actionADDtoCarts)
@@ -29,6 +30,7 @@ function AddToCart({ thisProduct, pickQuantity }) {
         // console.log(token);
         // console.log(thisProduct[0]);
         // console.log(pickQuantity);
+        await actionGetMyAccount(token)
         console.log('userData.userID', userData.userID);
         actionADDtoCarts(token, userData.userID, thisProduct[0], pickQuantity)
     }
