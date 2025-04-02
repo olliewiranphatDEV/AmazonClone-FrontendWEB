@@ -5,7 +5,7 @@ import useProductStore from '../../../store/ProductStore'
 import useAuthStore from '../../../store/UserStore'
 
 function AddToCart({ thisProduct, pickQuantity }) {
-    const actionGetMyAccount = useAuthStore(state => state.actionGetMyAccounts)
+    const actionGetMyAccount = useAuthStore(state => state.actionGetMyAccount)
     const userData = useAuthStore(state => state.userData)
 
     const actionADDtoCarts = useProductStore(state => state.actionADDtoCarts)
