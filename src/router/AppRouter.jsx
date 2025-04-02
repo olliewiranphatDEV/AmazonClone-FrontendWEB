@@ -24,7 +24,7 @@ import Payment from '../pages/userPages/Payment'
 import PaymentComplete from '../pages/userPages/PaymentComplete'
 
 
-///// Manage router here : define each path for link to Page Components
+///// Manage router here : define each path for link to Page Components, vercel
 function AppRouter() {
     return (
         <>
