@@ -31,7 +31,7 @@ function AddToCart({ thisProduct, pickQuantity }) {
         // console.log(thisProduct[0]);
         // console.log(pickQuantity);
         await actionGetMyAccount(token)
-        console.log('userData.userID', userData.userID);
+        // console.log('userData.userID', userData.userID);
         actionADDtoCarts(token, userData.userID, thisProduct[0], pickQuantity)
     }
 

@@ -2,6 +2,8 @@
 
 A fully functional e-commerce platform inspired by Amazon. Built with modern technologies including React.js, Node.js, Express.js, Prisma, and PostgreSQL, this clone features user authentication, product listings, shopping cart, Stripe payment integration, and an admin dashboard.
 
+## Live Demo : https://amazon-clone-web.vercel.app
+
 ## Features
 
 - Authentication (Sign up, Sign in, Clerk Integration)
