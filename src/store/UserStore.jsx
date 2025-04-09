@@ -13,7 +13,7 @@ const authStore = (set) => ({ //set : set role as new value == Global State
     },
     actionGetMyAccount: async (token) => { //Get My Account
         const response = await getMyAccount(token)
-        console.log('response', response);
+        // console.log('response, userData', response);
         set({ userData: response.data.results })
     },
 

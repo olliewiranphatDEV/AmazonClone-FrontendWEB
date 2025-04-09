@@ -15,9 +15,9 @@ function MainNavBar() {
 
 
     return (
-        <div className='bg-[#131921] h-[60px] text-white z-50 justify-between pr-2 flex fixed top-0 w-full items-center'>
-            <ReloadingLink to='/' className='flex items-center justify-end h-full ' >
-                < img src={centric} alt="CENTRIC" className='h-[145px] ' />
+        <div className='bg-[#131921] h-[60px] text-white z-50 justify-between pr-3 flex fixed gap-3 top-0 w-full items-center'>
+            <ReloadingLink to='/' className='flex items-center justify-end h-full overflow-hidden' >
+                < img src={centric} alt="CENTRIC" className='w-[100px] sm:w-[145px]' />
             </ReloadingLink>
             {/* Deliver to */}
             <div className=' h-full flex items-center ' >

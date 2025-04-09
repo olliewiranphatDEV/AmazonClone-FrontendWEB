@@ -7,16 +7,14 @@ import SecondNavBar from '../components/main/SecondNavBar'
 function PublicLayout() {
     return (
         <>
-            <div className=''>
+            <div className='z-50'>
                 <MainNavBar />
             </div>
             <div className='mt-[60px] flex flex-col'>
                 <SecondNavBar />
             </div>
-            <div className='mt-[-75px] flex-1'>
-                <Outlet />
-            </div>
 
+            <Outlet />
             <Footer />
 
         </>
