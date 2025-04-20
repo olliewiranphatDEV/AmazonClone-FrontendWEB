@@ -7,7 +7,7 @@ import ReloadingLink from '../ReloadingLink';
 function SellerSideBar() {
 
     return (
-        < div className='flex-1 flex flex-col items-center bg-[#131921] text-white h-full' >
+        < div className='min-w-[200px] flex flex-col items-center bg-[#131921] text-white' >
             {/* User Picture */}
             <UserPicSB />
 

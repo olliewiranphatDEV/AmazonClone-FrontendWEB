@@ -1,8 +1,8 @@
 import axios from "axios"
 const BASE_URL = import.meta.env.VITE_API_URL
 
-export const getMyProducts = async (token, userID) => {
-    return await axios(`${BASE_URL}/seller-center/products/all-products/${userID}`, {
+export const getMyProducts = async (token) => {
+    return await axios(`${BASE_URL}/seller-center/products/all-products`, {
         headers: { Authorization: `Bearer ${token}` }
     })
 }

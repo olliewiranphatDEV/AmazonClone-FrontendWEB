@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import centric from '../../images/centriclogo.png'
 import { Globe, MapPin } from 'lucide-react'
 import SigninSignout from './SigninSignout/SigninSignout'
@@ -9,18 +9,18 @@ import CartBTN from './cart/CartBTN'
 import ReloadingLink from '../ReloadingLink'
 
 
-function MainNavBar() {
+
+function MainNavBar({ setBgFocus }) {
     const { user } = useUser()
 
 
-
     return (
-        <div className='bg-[#131921] h-[60px] text-white z-50 justify-between pr-3 flex fixed gap-3 top-0 w-full items-center'>
+        <div className='w-full h-[60px] bg-[#131921] text-white sm:fixed top-0 z-50 flex justify-between items-center pr-4'>
             <ReloadingLink to='/' className='flex items-center justify-end h-full overflow-hidden' >
                 < img src={centric} alt="CENTRIC" className='w-[100px] sm:w-[145px]' />
             </ReloadingLink>
             {/* Deliver to */}
-            <div className=' h-full flex items-center ' >
+            <div className='h-full flex items-center' >
                 <button className='h-[80%] rounded-sm hover:bg-slate-400 hover:text-black hover:duration-300 px-2 flex flex-col items-center justify-center'>
                     <span className='text-[9px] account'>Deliver to {user?.firstName || ""}</span>
                     <div className='flex items-center relative'>
@@ -30,7 +30,7 @@ function MainNavBar() {
                 </button>
             </div>
             {/* SearchBar */}
-            < MainSearchBar />
+            < MainSearchBar setBgFocus={setBgFocus} />
             {/* SetLanguge */}
             <div className='flex py-2 pr-2 pl-1 h-[40px] text-[12px] items-center justify-center rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300' >
                 <Globe className='h-4' />
@@ -43,6 +43,7 @@ function MainNavBar() {
             <OrderHisBtn />
 
             <CartBTN />
+
         </div >
     )
 }

@@ -9,8 +9,8 @@ export const addCategory = async (token, value) => {
     })
 }
 
-export const updateCategoty = async (token, categoryID, input) => {
-    return await axios.patch(`${BASE_URL}/admin/management/all-categories/update-category/${categoryID}`, { input }, {
+export const updateCategoty = async (token, categoryID, inputCate) => {
+    return await axios.patch(`${BASE_URL}/admin/management/all-categories/update-category/${categoryID}`, { name: inputCate }, {
         headers: {
             Authorization: `Bearer ${token}`
         }

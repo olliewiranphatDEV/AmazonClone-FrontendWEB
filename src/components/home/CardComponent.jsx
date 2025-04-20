@@ -7,7 +7,7 @@ function CardComponent({ cards }) {
                 {cards.map((card, i) => (
                     <div
                         key={i}
-                        className="max-w-[200px] sm:max-w-[280px] bg-white p-4 shrink-0 overflow-y-hidden"
+                        className="max-w-[231px] sm:max-w-[280px] max-h-[330px] sm:max-h-[350px] bg-white p-4 shrink-0 overflow-y-hidden"
                     >
                         {/* card content */}
                         {card}

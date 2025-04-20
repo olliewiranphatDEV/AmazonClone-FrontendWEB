@@ -22,53 +22,57 @@ import AllCategories from '../pages/adminPages/AllCategories'
 import AllSellers from '../pages/adminPages/AllSellers'
 import Payment from '../pages/userPages/Payment'
 import PaymentComplete from '../pages/userPages/PaymentComplete'
+import SwitchToSeller from '../pages/sellerPages/SwitchToSeller'
+import AllCustomers from '../pages/adminPages/AllCustomers'
 
 
 ///// Manage router here : define each path for link to Page Components, vercel
 function AppRouter() {
     return (
-        <>
-            <Routes>
-                {/* PUBLIC */}
-                <Route path='/' element={<PublicLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='search/related-products' element={<SearchRelatedProduct />} />
-                    <Route path='search/related-products/:productID' element={<ProductDetail />} />
-                </Route>
 
-                {/* USER */}
-                <Route path='user' element={<UserLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='update-account' element={<UserAccount />} />
-                    <Route path='order-history' element={<OrderHistory />} />
-                    <Route path='cart' element={<Cart />} />
-                    {/* ORDER link to /user/payment */}
+        <Routes>
+            {/* PUBLIC */}
+            <Route path='/' element={<PublicLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path='search/related-products' element={<SearchRelatedProduct />} />
+                <Route path='search/related-products/:productID' element={<ProductDetail />} />
+                <Route path='switch-to-seller' element={<SwitchToSeller />} />
+            </Route>
 
-                    {/* PAYMENT */}
-                    <Route path='payment' element={<Payment />} />
-                    <Route path='payment/complete/:session' element={<PaymentComplete />} />
-                </Route>
+            {/* USER */}
+            <Route path='user' element={<UserLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path='update-account' element={<UserAccount />} />
+                <Route path='order-history' element={<OrderHistory />} />
+                <Route path='cart' element={<Cart />} />
+                {/* ORDER link to /user/payment */}
 
-                {/* SELLER */}
-                <Route path='seller-center' element={<ProtectRoutes el={<SellerLayout />} allows={["SELLER"]} />}>
-                    <Route index element={<SellerDashboard />} />
-                    <Route path='all-products' element={<AllProducts />} />
-                    <Route path='all-products/add-product' element={<AddProduct />} />
-                    <Route path='all-products/update-product/:productID' element={<UpdateProduct />} />
-                    <Route path='orders-revenue' element={<OrdersRevenue />} />
-                </Route>
+                {/* PAYMENT */}
+                <Route path='payment' element={<Payment />} />
+                <Route path='payment/complete/:session' element={<PaymentComplete />} />
+            </Route>
 
-                {/* ADMIN */}
-                <Route path='admin' element={<ProtectRoutes el={<AdminLayout />} allows={["ADMIN"]} />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path='management/all-categories' element={<AllCategories />} />
-                    <Route path='management/all-sellers' element={<AllSellers />} />
-                </Route>
+            {/* SELLER */}
+            <Route path='seller-center' element={<ProtectRoutes el={<SellerLayout />} allows={["SELLER"]} />}>
+                <Route index element={<SellerDashboard />} />
+                <Route path='all-products' element={<AllProducts />} />
+                <Route path='all-products/add-product' element={<AddProduct />} />
+                <Route path='all-products/update-product/:productID' element={<UpdateProduct />} />
+                <Route path='orders-revenue' element={<OrdersRevenue />} />
+            </Route>
 
-                {/* Not found page */}
-                <Route path='*' element={<NotFound />} />
-            </Routes >
-        </>
+            {/* ADMIN */}
+            <Route path='admin-center' element={<ProtectRoutes el={<AdminLayout />} allows={["ADMIN"]} />}>
+                <Route index element={<Dashboard />} />
+                <Route path='management/all-categories' element={<AllCategories />} />
+                <Route path='management/all-customers' element={<AllCustomers />} />
+                <Route path='management/all-sellers' element={<AllSellers />} />
+            </Route>
+
+            {/* Not found page */}
+            <Route path='*' element={<NotFound />} />
+        </Routes >
+
     )
 }
 

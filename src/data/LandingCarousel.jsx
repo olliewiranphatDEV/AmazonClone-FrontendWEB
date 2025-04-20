@@ -13,7 +13,7 @@ const LandingData = [
     </div>,
 
     <div className="bg-gradient-to-b from-[#f7b047] to-white h-full relative flex justify-center">
-        <div className="w-[60%] flex mt-8 sm:mt-16 relative">
+        <div className="w-[60%] flex mt-8 sm:mt-[6%] relative">
             <div className="flex flex-col">
                 <span className="text-[#222b38] text-md sm:text-3xl font-bold">FREE Shipping to Thailand</span>
                 <span className="text-[#222b38] text-[10px] sm:text-[20px] pl-6 mb-5 account">On qualifying order* over USD 35</span>

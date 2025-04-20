@@ -11,8 +11,12 @@ import UpdateCategory from '../../components/admin/UpdateCategory'
 
 function AllCategories() {
     const allCategories = useCategoryStore(state => state.allCategories)
+    console.log('allCategories', allCategories);
+
     const [showUpdate, setShowUpdate] = useState(false)
     const [categoryID, setCategoryID] = useState("")
+
+
     const hdlClickUpdate = (categoryID) => {
         console.log('categoryID', categoryID);
         setShowUpdate(!showUpdate)
@@ -23,13 +27,13 @@ function AllCategories() {
 
 
     return (
-        <div className='w-full p-4 flex flex-col flex-wrap h-full gap-2'>
-            <span className='account font-bold text-[18px] pl-4'>All Categories</span>
-            <div className='w-full flex px-4 justify-center'>
-                <div className='w-[50%] mt-4 border border-gray-400 rounded-md p-4'>
-                    <div className='flex w-full text-[12px] font-semibold border-gray-400 border-b-[1px] pb-2'>
-                        <div className='w-[20%]'>ID</div>
-                        <div className='flex-1 ml-2'>Name</div>
+        <div className='w-full py-8 px-6 flex flex-col flex-wrap h-full mb-20 gap-3 text-[#131921]'>
+            <span className='font-bold text-[18px] pl-4'>All Categories</span>
+            <div className='w-[90%] mx-auto justify-center flex flex-wrap gap-10'>
+                <div className='flex-1 mt-4 border border-gray-400 rounded-md p-4'>
+                    <div className='flex w-full text-[12px] font-bold border-gray-400 border-b-[1px] pb-2'>
+                        <div className='w-[20%] text-center'>ID</div>
+                        <div className='w-[30%] ml-2'>Name</div>
                         <div className='flex-1 text-center'>Update</div>
                         <div className='flex-1 text-center'>Delete</div>
                     </div>
@@ -38,10 +42,9 @@ function AllCategories() {
                     }
 
                 </div>
-                <div className=' ml-7'>
-                    <AddCategory />
 
-                </div>
+                {/* ADD A NEW CATEGORY  */}
+                <AddCategory />
             </div>
         </div>
     )

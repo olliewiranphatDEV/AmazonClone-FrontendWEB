@@ -13,7 +13,7 @@ const ProductStore = (set, get) => ({
     search: null,
     actionGetAllProductsDB: async () => {
         const allproducts = await getAllProductDB()
-        // console.log('allproducts', allproducts);
+        console.log('allproducts', allproducts);
         set({ allProductsDB: allproducts.data.results })
     },
     actionsearchProductsDB: async (categoryID, search) => {
@@ -49,7 +49,9 @@ const ProductStore = (set, get) => ({
         const updatedCart = cart.map(el =>
             el.productID === productID ? { ...el, checked: !el.checked } : el)
         set({ carts: updatedCart })
-    }
+    },
+    triggerReload: false,
+    setTriggerReload: () => set((state) => ({ triggerReload: !state.triggerReload }))
 })
 const useProductStore = create(persist(ProductStore, { name: "ProductStore" }))
 export default useProductStore

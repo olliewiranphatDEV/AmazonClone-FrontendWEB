@@ -9,47 +9,40 @@ import CardInCarosel from '../../components/home/CardInCarosel'
 import { card1, card2 } from '../../data/CardsData'
 import CardComponent from '../../components/home/CardComponent'
 
-const slides = [
-    <div className="bg-gradient-to-b from-[#f7b047] to-white flex items-center justify-center">
-        <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#222b38]">FREE Shipping to Thailand</h2>
-    </div>,
-    <div className="bg-gradient-to-b from-[#3061a1] to-white flex items-center justify-center">
-        <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#222b38]">Slide 2 Content</h2>
-    </div>,
-]
 
 
 
 function HomePage() {
     const actionGetMyAccount = useAuthStore(state => state.actionGetMyAccount)
-    const { user } = useUser()
-    // console.log('user', user);
+
     const { getToken, isSignedIn } = useAuth()
 
-    const actionGetAllCate = useCategoryStore(state => state.actionGetAllCate)
-    const actionGetAllProductsDB = useProductStore(state => state.actionGetAllProductsDB)
+    const { actionGetAllCate } = useCategoryStore()
+    const { actionGetAllProductsDB, triggerReload } = useProductStore()
     useEffect(() => {
-        if (isSignedIn) {
-            const fetchUserAccount = async () => {
-                try {
-                    const token = await getToken()
-                    actionGetMyAccount(token)
-                } catch (error) {
-                    console.log("ERROR, fetchUseraccount", error);
+        const fetchUserAccount = async () => {
+            try {
+                const token = await getToken()
+                actionGetMyAccount(token)
+            } catch (error) {
+                console.log("ERROR, fetchUseraccount", error);
 
-                }
             }
+        }
+        if (isSignedIn) {
             fetchUserAccount()
         }
+    }, [isSignedIn])
+
+
+    useEffect(() => {
         actionGetAllCate()
         actionGetAllProductsDB()
-    }, [isSignedIn])
-    const allProductsDB = useProductStore(state => state.allProductsDB)
-    // console.log('allProductsDB', allProductsDB);
+    }, [])
 
 
     return (
-        <>
+        <div className='pb-20'>
             <div className='relative'>
                 <CustomCarousel slides={LandingData} />
                 <CardInCarosel cards={card1} />
@@ -57,11 +50,14 @@ function HomePage() {
 
             {/* Row 2 */}
 
-            <div className='w-full mt-[41%] sm:mt-[11%]'>
+            <div className='w-full mt-[41%] md:mt-[19%] lg:mt-[11%] flex flex-col gap-4'>
+                <CardComponent cards={card2} />
+                {/* SWIPER CAROUSEL*/}
+                <CardComponent cards={card2} />
                 <CardComponent cards={card2} />
             </div>
 
-        </>
+        </div>
 
     )
 }

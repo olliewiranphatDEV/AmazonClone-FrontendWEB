@@ -1,14 +1,15 @@
-import { SignedIn, SignOutButton, useAuth } from '@clerk/clerk-react'
-import { Loader } from 'lucide-react'
+import { SignedIn, SignOutButton, useAuth, useUser } from '@clerk/clerk-react'
+import { Loader, LoaderCircle } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router'
 import ReloadingLink from '../../ReloadingLink'
 
 
 function ListSignout() {
+    const { user } = useUser()
     const { isLoaded } = useAuth()
     if (!isLoaded) {
-        return <Loader className='m-auto animate-spin text-gray-400 font-semibold' />
+        return <LoaderCircle className='m-auto animate-spin text-white font-semibold' />
     }
     return (
         <SignedIn>
@@ -21,6 +22,11 @@ function ListSignout() {
                     <ReloadingLink to='/user/update-account' className='cursor-pointer text-[11px] account text-start hover:text-red-600 hover:underline hover:duration-200'>Account</ReloadingLink>
                     <ReloadingLink to='/user/order-history' className='cursor-pointer text-[11px] account text-start hover:text-red-600 hover:underline hover:duration-200'>Order History</ReloadingLink>
                     <ReloadingLink to='/user/cart' className='cursor-pointer text-[11px] account text-start hover:text-red-600 hover:underline hover:duration-200'>Cart</ReloadingLink>
+                    {
+                        user?.publicMetadata.role === "ADMIN" && (
+                            <ReloadingLink to='/admin-center' className='cursor-pointer text-[11px] account text-start hover:text-red-600 hover:underline hover:duration-200'>Admin Center</ReloadingLink>
+                        )
+                    }
                 </div>
             </ul>
         </SignedIn>

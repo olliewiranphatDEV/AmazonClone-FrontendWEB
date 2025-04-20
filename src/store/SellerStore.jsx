@@ -7,8 +7,8 @@ import { getDashboard } from "../api/seller";
 const SellerStore = (set) => ({
     sellerDashboard: null,
     myProducts: null,
-    actionGetMyProducts: async (token, userID) => {
-        const myProducts = await getMyProducts(token, userID)
+    actionGetMyProducts: async (token) => {
+        const myProducts = await getMyProducts(token)
         // console.log('myProducts', myProducts);
         set({ myProducts: myProducts.data.results })
     },

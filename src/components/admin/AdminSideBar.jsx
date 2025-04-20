@@ -8,7 +8,7 @@ function AdminSideBar() {
         < div className='flex-1 flex flex-col items-center bg-[#131921] text-white h-full' >
             {/* User Picture */}
             <UserPicSB />
-            <ReloadingLink to='/admin' className='account flex justify-start gap-2 hover:bg-slate-400 hover:font-semibold hover:text-black w-full py-[10px] px-4 hover:duration-300 rounded-sm cursor-pointer'>
+            <ReloadingLink to='/admin-center' className='account flex justify-start gap-2 hover:bg-slate-400 hover:font-semibold hover:text-black w-full py-[10px] px-4 hover:duration-300 rounded-sm cursor-pointer'>
                 <LayoutDashboardIcon className='h-[18px]' />
                 <span className='ml-1 bottom-[2px] text-[12px] cursor-pointer'>Dashboard</span>
             </ReloadingLink>
@@ -18,9 +18,9 @@ function AdminSideBar() {
                     <span className=' absolute pl-9 bottom-[-3px] text-[12px]'>Management</span>
                 </div>
                 <ul className='pl-14 flex flex-col gap-3 mt-4 mb-2 text-[11px]'>
-                    <ReloadingLink to='/admin/management/all-categories' className='block pb-1 w-[70px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Categories</ReloadingLink>
-                    <ReloadingLink to='/admin/management/all-customers' className='block pb-1 w-[71px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Customers</ReloadingLink>
-                    <ReloadingLink to='/admin/management/all-sellers' className='w-[50px] pb-1 cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Sellers</ReloadingLink>
+                    <ReloadingLink to='/admin-center/management/all-categories' className='block pb-1 w-[70px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Categories</ReloadingLink>
+                    <ReloadingLink to='/admin-center/management/all-customers' className='block pb-1 w-[71px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Customers</ReloadingLink>
+                    <ReloadingLink to='/admin-center/management/all-sellers' className='w-[50px] pb-1 cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Sellers</ReloadingLink>
                 </ul>
             </div>
             <div className='w-full mt-3 flex flex-col gap-1'>
