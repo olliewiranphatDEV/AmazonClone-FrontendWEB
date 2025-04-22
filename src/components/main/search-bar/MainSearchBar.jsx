@@ -7,8 +7,9 @@ import useProductStore from '../../../store/ProductStore';
 import { useAuth } from '@clerk/clerk-react';
 import { CSSTransition } from 'react-transition-group';
 import CategoriesPopup from './CategoriesPopup';
+import { renderAlert } from '../../../utils/renderAlert';
 
-function MainSearchBar({ setBgFocus }) {
+function MainSearchBar({ setBgFocus, setLoading }) {
     const actionsearchProductsDB = useProductStore(state => state.actionsearchProductsDB);
     const navigate = useNavigate();
 
@@ -52,37 +53,49 @@ function MainSearchBar({ setBgFocus }) {
     const hdlSubFormSearch = async (value) => {
         setShowCate(false)
         setBgFocus(false)
+
+
         console.log('value', value);
-
         const { categoryID, search } = value;
-
 
         if (!categoryID && !search) {
             navigate('/'); // GO HOME
             return;
         }
 
-        //EITHER FILL TEXT INPUT OR JUST SELECT CATEGOTY --> SEARCH IN DB + NAVIGATE('/search/related-products')
-        await actionsearchProductsDB(categoryID, search); //KEEP DATA IN GLOBAL STATE
-        setValue("search", ""); // CLEAR VALUE OF SEARCH WORD INPUT
+        setLoading(true)
 
-        const query = new URLSearchParams()
-        //IF HAVE CATEGORYID
-        if (categoryID) {
-            query.set("categoryID", categoryID)
+        try {
+            //EITHER FILL TEXT INPUT OR JUST SELECT CATEGOTY --> SEARCH IN DB + NAVIGATE('/search/related-products')
+            await actionsearchProductsDB(categoryID, search); //KEEP DATA IN GLOBAL STATE
+            setValue("search", ""); // CLEAR VALUE OF SEARCH WORD INPUT
+
+
+        } catch (error) {
+            console.log("Cannot Search Related-Products, ERROR", error);
+            renderAlert("Cannot add a new product!", "error")
+        } finally {
+            setTimeout(() => {
+                setLoading(false)
+                const query = new URLSearchParams()
+                //IF HAVE CATEGORYID
+                if (categoryID) {
+                    query.set("categoryID", categoryID)
+                }
+                //IF HAVE SEARCH WORD
+                if (search) {
+                    query.set("search", value.search)
+                }
+                navigate(`/search/related-products?${query.toString()}`); //NAV TO SEARCH-RELATED-PRODUCTS
+            }, 900)
         }
-        //IF HAVE SEARCH WORD
-        if (search) {
-            query.set("search", value.search)
-        }
-        navigate(`/search/related-products?${query.toString()}`); //NAV TO SEARCH-RELATED-PRODUCTS
 
     };
 
 
 
     return (
-        <div ref={wrapperRef} className="relative min-w-[50%] flex flex-col h-full">
+        <div ref={wrapperRef} className="relative min-w-[50%] flex-1 flex flex-col h-full">
             {/* Search Form */}
             <form
                 onSubmit={handleSubmit(hdlSubFormSearch)}

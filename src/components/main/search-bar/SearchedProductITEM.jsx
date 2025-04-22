@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
-function SearchedProductITEM({ item }) {
+function SearchedProductITEM({ item, setLoading, setScollToTop }) {
+    const navigate = useNavigate()
+
     console.log('item', item);
-    const { ProductImage, category, description, price, productName } = item
+    const { ProductImage, price, productName } = item
+
 
     const today = new Date()
 
@@ -21,10 +25,20 @@ function SearchedProductITEM({ item }) {
     }
 
 
+    const hdlProductDetail = () => {
+        setScollToTop(true)
+        setLoading(true)
+        setTimeout(() => {
+            navigate(`/search/related-products/${item.productID}`)
+        }, 1000)
+    }
+
+
 
 
     return (
-        <div className='w-[250px] flex flex-col gap-5'>
+        <button onClick={hdlProductDetail}
+            className='w-[250px] flex flex-col gap-5'>
             <div className='h-[250px]'>
                 <img src={ProductImage[0].secure_url} alt="product-image" className='w-full h-full object-cover rounded-lg' />
             </div>
@@ -38,7 +52,7 @@ function SearchedProductITEM({ item }) {
                 </div>
                 <div>
                     <sup>$</sup>
-                    <span className='text-[22px] font-semibold'>{price.split(".")[0]}</span>
+                    <span className='text-[22px] font-semibold mx-[2px]'>{price.split(".")[0]}</span>
                     {
                         price.split(".")[1].length < 2 ? (<sup>{price.split(".")[1]}0</sup>) : (<sup>{price.split(".")[1]}</sup>)
                     }
@@ -55,7 +69,7 @@ function SearchedProductITEM({ item }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </button>
     )
 }
 

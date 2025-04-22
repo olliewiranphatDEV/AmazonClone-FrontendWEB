@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 function Footer() {
     return (
-        <div className='w-full h-[280px] bg-[#131921] text-white py-[50px] flex justify-center'>
+        <div className='w-full min-h-[280px] bg-[#131921] text-white py-[50px] flex justify-center'>
             <div className="px-[20px] flex flex-col text-[11px] gap-2">
                 <span className='text-[14px] font-bold'>Get to Know Us</span>
                 <Link to='/careers'>Careers</Link>

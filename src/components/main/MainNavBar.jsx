@@ -10,17 +10,20 @@ import ReloadingLink from '../ReloadingLink'
 
 
 
-function MainNavBar({ setBgFocus }) {
+function MainNavBar({ setBgFocus, setLoading }) {
     const { user } = useUser()
 
 
     return (
-        <div className='w-full h-[60px] bg-[#131921] text-white sm:fixed top-0 z-50 flex justify-between items-center pr-4'>
-            <ReloadingLink to='/' className='flex items-center justify-end h-full overflow-hidden' >
-                < img src={centric} alt="CENTRIC" className='w-[100px] sm:w-[145px]' />
+        <div className='w-full h-[60px] bg-[#131921] text-white sm:fixed top-0 z-50 flex justify-between items-center px-2 gap-3'>
+
+            {/* LOGO APP */}
+            <ReloadingLink to='/' className='flex items-center justify-end  h-full overflow-hidden mr-1' >
+                < img src="https://i.ibb.co/Zz7kphTn/Screenshot-2025-04-22-214714.png" alt="CENTRIC" className='w-[100px] sm:w-[120px]' />
             </ReloadingLink>
-            {/* Deliver to */}
-            <div className='h-full flex items-center' >
+
+            {/* DELIVERY TO */}
+            <div className='hidden lg:flex items-center h-full' >
                 <button className='h-[80%] rounded-sm hover:bg-slate-400 hover:text-black hover:duration-300 px-2 flex flex-col items-center justify-center'>
                     <span className='text-[9px] account'>Deliver to {user?.firstName || ""}</span>
                     <div className='flex items-center relative'>
@@ -29,20 +32,33 @@ function MainNavBar({ setBgFocus }) {
                     </div>
                 </button>
             </div>
-            {/* SearchBar */}
-            < MainSearchBar setBgFocus={setBgFocus} />
-            {/* SetLanguge */}
+
+            {/* MAIN SEARCH BAR */}
+            < MainSearchBar
+                setBgFocus={setBgFocus}
+                setLoading={setLoading}
+            />
+
+            {/* SETUP LANGUAGE */}
             <div className='flex py-2 pr-2 pl-1 h-[40px] text-[12px] items-center justify-center rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300' >
                 <Globe className='h-4' />
                 <span>EN</span>
             </div>
 
-            {/* SigninSignout  */}
+            {/* SIGNIN-SIGNOUT  */}
             <SigninSignout />
 
-            <OrderHisBtn />
+            {/* ORDER-HISTORY */}
+            <div className='hidden lg:flex'>
+                <OrderHisBtn />
+            </div>
 
-            <CartBTN />
+            {/* CART */}
+            <div className='hidden lg:flex'>
+                <CartBTN />
+            </div>
+
+
 
         </div >
     )

@@ -13,15 +13,15 @@ function SigninSignout() {
     return (
         <div className='relative group rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2'>
 
-            {/* btnSignin */}
+            {/* SIGN-IN BTN */}
             <SignedOut>
-                <button className='flex flex-col justify-center'>
-                    <span className='account text-[9px]'>Hello, sign in</span>
-                    <span className='text-[12px] font-bold'>Account & Lists</span>
+                <button className='flex flex-col justify-center text-[10px]'>
+                    <span className='account lg:text-[9px]'>Hello, sign in</span>
+                    <span className='hidden lg:flex text-[12px] font-bold'>Account & Lists</span>
                 </button>
             </SignedOut>
 
-            {/* btnSignout */}
+            {/* SIGN-OUT BTN */}
             <SignedIn>
                 <button className='flex justify-center'  >
                     <div className="flex flex-col">
@@ -32,9 +32,10 @@ function SigninSignout() {
                 </button>
             </SignedIn>
 
-            {/* ulList Sign in*/}
+            {/* SIGN-IN LIST*/}
             <ListSignin />
-            {/* ulList */}
+
+            {/* SIGN-OUT LIST */}
             <ListSignout />
 
         </div>
