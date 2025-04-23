@@ -15,6 +15,7 @@ function MainSearchBar({ setBgFocus, setLoading }) {
 
     const [showCate, setShowCate] = useState(false);
     const [selectedCategoryName, setSelectedCategoryName] = useState("All");
+
     const wrapperRef = useRef(null);
     const dropdownRef = useRef(null);
     const { register, handleSubmit, setValue } = useForm(); //react-hook-form to submit
@@ -121,8 +122,8 @@ function MainSearchBar({ setBgFocus, setLoading }) {
                     placeholder="Search Centric"
                     className="w-full h-full text-[12px] text-black pl-2 pr-10 rounded-r-[5px]"
                     ref={(e) => {
-                        register("search").ref(e); // ✅ ผูกกับ RHF
-                        inputSearchRef.current = e; // ✅ เอาไว้สำหรับ focus
+                        register("search").ref(e); // ผูกกับ RHF
+                        inputSearchRef.current = e; // เอาไว้สำหรับ focus
                     }}
                 />
 
@@ -154,7 +155,6 @@ function MainSearchBar({ setBgFocus, setLoading }) {
                 <CategoriesPopup
                     setValue={setValue}
                     setSelectedCategoryName={setSelectedCategoryName}
-                    showCate={showCate}
                     setShowCate={setShowCate}
                     dropdownRef={dropdownRef}
                 />

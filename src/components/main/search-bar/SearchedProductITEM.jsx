@@ -1,76 +1,86 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router';
 
 function SearchedProductITEM({ item, setLoading, setScollToTop }) {
     const navigate = useNavigate()
 
-    console.log('item', item);
-    const { ProductImage, price, productName } = item
+    if (!item || !item.productName || !item.price || !item.ProductImage?.length) {
+        return <div className='text-red-500'>Invalid product data</div>
+    }
+    const { ProductImage, price, productName, productID } = item
 
 
-    const today = new Date()
-
-    const deliveryDate = new Date(today)
-    deliveryDate.setDate(today.getDate() + 5)
-
-    const fastedDelivery = new Date(today)
-    fastedDelivery.setDate(today.getDate() + 3)
-
-    const renderDate = (date) => {
+    const getEstimatedDate = (offsetDays) => {
+        const date = new Date();
+        date.setDate(date.getDate() + offsetDays);
         return date.toLocaleDateString('en-US', {
             weekday: "short",
             month: "short",
             day: "numeric"
-        })
-    }
-
+        });
+    };
 
     const hdlProductDetail = () => {
         setScollToTop(true)
         setLoading(true)
         setTimeout(() => {
-            navigate(`/search/related-products/${item.productID}`)
+            navigate(`/search/related-products/${productID}`)
         }, 1000)
-    }
+    };
 
 
+    const formatPrice = (price) => {
+        const [dollars, cents = "00"] = price.toString().split(".");
+        return {
+            dollars,
+            cents: cents.length === 1 ? cents + "0" : cents
+        };
+    };
 
+    const { dollars, cents } = formatPrice(price);
 
     return (
-        <button onClick={hdlProductDetail}
-            className='w-[250px] flex flex-col gap-5'>
+        <button onClick={hdlProductDetail} className='w-[250px] flex flex-col gap-5'>
+
+            {/* PRODUCT IMAGE */}
             <div className='h-[250px]'>
-                <img src={ProductImage[0].secure_url} alt="product-image" className='w-full h-full object-cover rounded-lg' />
+                <img
+                    src={ProductImage?.[0]?.secure_url || "/fallback-image.png"}
+                    alt="product-image"
+                    className='w-full h-full object-cover rounded-lg'
+                />
             </div>
 
             {/* PRODUCT DETAILS */}
             <div>
+
+                {/* PRODUCT NAME */}
                 <div className='h-[70px] text-[14px]'>
-                    {
-                        productName.length > 90 ? (<span>{productName.slice(0, 90)}...</span>) : <span>{productName}</span>
-                    }
+                    <span>{productName.length > 90 ? `${productName.slice(0, 90)}...` : productName}</span>
                 </div>
+
+                {/* PRODUCT PRICE */}
                 <div>
                     <sup>$</sup>
-                    <span className='text-[22px] font-semibold mx-[2px]'>{price.split(".")[0]}</span>
-                    {
-                        price.split(".")[1].length < 2 ? (<sup>{price.split(".")[1]}0</sup>) : (<sup>{price.split(".")[1]}</sup>)
-                    }
+                    <span className='text-[22px] font-semibold mx-[2px]'>{dollars}</span>
+                    <sup>{cents}</sup>
                 </div>
+
+                {/* DELIVERY DATE */}
                 <div className='flex flex-col gap-1 text-[12px]'>
                     <div className='flex gap-1'>
                         <span>Delivery</span>
-                        <span className='font-semibold'>{renderDate(deliveryDate)}</span>
+                        <span className='font-semibold'>{getEstimatedDate(5)}</span>
                         <span>to Thailand</span>
                     </div>
                     <div className='flex gap-1'>
                         <span>Or fasted delivery</span>
-                        <span className='font-semibold'>{renderDate(fastedDelivery)}</span>
+                        <span className='font-semibold'>{getEstimatedDate(3)}</span>
                     </div>
                 </div>
             </div>
         </button>
-    )
+    );
 }
 
-export default SearchedProductITEM
+export default SearchedProductITEM;

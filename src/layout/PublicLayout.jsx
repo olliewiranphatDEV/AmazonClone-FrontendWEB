@@ -20,15 +20,21 @@ function PublicLayout() {
 
 
     return (
-        <>
+        <div className="min-h-screen flex flex-col">
+
+            {/* NAVBAR */}
             <div className='relative w-full z-50'>
                 <MainNavBar
                     setBgFocus={setBgFocus}
                     setLoading={setLoading}
                 />
             </div>
-            <div className='sm:mt-[60px] w-full relative'>
+            <div className='sm:mt-[60px]'>
                 <SecondNavBar />
+            </div>
+
+            {/* MAIN CONTENT */}
+            <div className='flex-grow w-full relative pb-20'>
                 <Outlet />
                 <CSSTransition
                     in={bgFocus}
@@ -40,10 +46,10 @@ function PublicLayout() {
                         exitActive: 'opacity-0 scale-95 transition duration-200 ease-in'
                     }}
                     unmountOnExit
-                    nodeRef={overlayRef} // ✅ เพิ่มตรงนี้
+                    nodeRef={overlayRef}
                 >
                     <div
-                        ref={overlayRef} // ✅ ใส่ ref ให้กับ DOM ที่ transition
+                        ref={overlayRef}
                         onClick={() => setBgFocus(false)}
                         style={{
                             width: "100%",
@@ -77,8 +83,9 @@ function PublicLayout() {
                     </div>)
                 }
             </div>
+
             <Footer />
-        </>
+        </div>
     )
 }
 

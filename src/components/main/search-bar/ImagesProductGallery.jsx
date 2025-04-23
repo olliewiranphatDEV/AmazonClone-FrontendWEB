@@ -25,9 +25,9 @@ function ImagesProductGallery({ ProductImage }) {
                         ProductImage.length > 0 && ProductImage.map(({ imageID, secure_url }) => (
                             <SwiperSlide key={imageID}>
                                 <div onMouseEnter={() => setMainImage(secure_url)}
-                                    className={`cursor-pointer w-[50px] h-[50px]  hover:scale-110 hover:duration-200 mx-auto`}
+                                    className={`cursor-pointer w-[50px] h-[50px]  hover:scale-110 hover:duration-200 mx-auto bg-white rounded-xl overflow-hidden`}
                                 >
-                                    <img src={secure_url} alt="image-thumbnail" className="w-full h-full object-contain rounded-xl" /> {/* กำหนดขนาดภาพ thumbnail */}
+                                    <img src={secure_url} alt="image-thumbnail" className="w-full h-full object-contain" /> {/* กำหนดขนาดภาพ thumbnail */}
                                 </div>
                             </SwiperSlide>
                         ))

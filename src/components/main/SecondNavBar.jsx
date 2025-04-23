@@ -10,7 +10,7 @@ function SecondNavBar() {
 
 
     return (
-        <div className='w-full h-[35px] text-white text-[11px] bg-[#232f3e] px-4 flex items-center gap-2 flex-wrap'>
+        <div className='w-full h-[35px] text-white text-[11px] bg-[#232f3e] px-4 flex items-center gap-2'>
 
             {/* ALL NAVBAR */}
             <button
@@ -40,7 +40,7 @@ function SecondNavBar() {
             </ReloadingLink>
 
             <ReloadingLink to=''
-                className='h-[80%] p-2 flex items-center cursor-pointer rounded-sm hover:bg-slate-700 hover:duration-300'
+                className='hidden lg:flex h-[80%] p-2 items-center cursor-pointer rounded-sm hover:bg-slate-700 hover:duration-300'
             >
                 <span>Gift Carts</span>
             </ReloadingLink>
