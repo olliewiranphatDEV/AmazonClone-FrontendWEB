@@ -10,7 +10,7 @@ function OrderHisBtn() {
     if (!userId) {
         return (
             <SignInButton mode='modal' forceRedirectUrl='/user/order-history'>
-                <div className='rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2' >
+                <div className='rounded-md hover:bg-slate-800 hover:duration-300 p-2' >
                     <button className='flex flex-col justify-center'>
                         <span className='account text-[9px]'>Returns</span>
                         <span className='text-[12px] font-bold'>& Orders</span>
@@ -23,7 +23,7 @@ function OrderHisBtn() {
 
 
     return (
-        <div className='rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2' >
+        <div className='rounded-md hover:bg-slate-800 hover:duration-300 p-2' >
             <ReloadingLink to='/user/order-history' className='flex flex-col justify-center'>
                 <span className='account text-[9px]'>Returns</span>
                 <span className='text-[12px] font-bold'>& Orders</span>

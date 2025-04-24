@@ -13,7 +13,7 @@ function ListSignout() {
     }
     return (
         <SignedIn>
-            <ul className='py-4 hidden top-11 left-[-35px] rounded-md bg-white w-[158px] absolute group-hover:block text-black flex-col'>
+            <ul className='py-4 hidden top-12 left-[-20%] rounded-md bg-white w-[158px] absolute group-hover:block text-black flex-col'>
                 <SignOutButton className='cursor-pointer bg-[#ffd814] rounded-md w-[130px] mx-auto flex justify-center items-center h-8 text-[11px]' mode='modal'>
                     <li>Sign Out</li>
                 </SignOutButton>

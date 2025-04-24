@@ -29,14 +29,6 @@ export const getAllProductDB = async () => {
 }
 
 
-///// Find Products by categoryID : 
-// export const PDCategoryID = async (categoryID) => {
-//     return await axios(`http://localhost:8080/products/${categoryID}`)
-// } 
-
-// export const searchProducts = async (categoryID, search) => {
-//     return await axios(`http://localhost:8080/user/search-products?categoryID=${categoryID}&search=${search}`)
-// } 
 
 export const searchProducts = async (categoryID, search) => {
     const params = new URLSearchParams();

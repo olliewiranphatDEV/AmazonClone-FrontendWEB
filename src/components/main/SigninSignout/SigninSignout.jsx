@@ -11,7 +11,7 @@ function SigninSignout() {
 
 
     return (
-        <div className='relative group rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2'>
+        <div className='relative group rounded-md hover:bg-slate-800 hover:duration-300 p-2'>
 
             {/* SIGN-IN BTN */}
             <SignedOut>
@@ -23,12 +23,12 @@ function SigninSignout() {
 
             {/* SIGN-OUT BTN */}
             <SignedIn>
-                <button className='flex justify-center'  >
+                <button className='flex justify-center items-center'  >
                     <div className="flex flex-col">
                         <span className='account text-[9px]'>Hello, {user?.firstName || "Welcome"}</span>
                         <span className='text-[12px] font-bold'>Account & Lists</span>
                     </div>
-                    <ChevronDown className='text-black w-3 ' />
+                    <ChevronDown className='text-white w-3 ' />
                 </button>
             </SignedIn>
 

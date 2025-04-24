@@ -5,7 +5,7 @@ function ListSignin() {
 
     return (
         <SignedOut>
-            <ul className='hidden absolute group-hover:block top-12 rounded-md left-[-42px] p-2 bg-white w-[160px] text-black'>
+            <ul className='hidden absolute group-hover:block top-12 rounded-md left-[-25%] p-2 bg-white w-[160px] text-black'>
                 <SignInButton className='cursor-pointer bg-[#ffd814] rounded-md w-[130px] my-2 mx-auto flex justify-center items-center h-8' mode='modal'>
                     Sign in
                 </SignInButton>

@@ -10,7 +10,7 @@ function CartBTN() {
     if (!userId) {
         return (
             <SignInButton mode='modal' forceRedirectUrl='/user/order-history'>
-                <div className='cursor-pointer rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2  relative h-[45px] flex w-[74px]'>
+                <div className='cursor-pointer rounded-md hover:bg-slate-800 hover:duration-300 p-2  relative h-[45px] flex w-[74px]'>
                     <ShoppingCart className='h-[20px] absolute top-2' />
                     <span className='absolute left-8 bottom-[2px] font-bold pr-2'>Cart</span>
                 </div>
@@ -21,7 +21,7 @@ function CartBTN() {
 
 
     return (
-        <ReloadingLink to='/user/cart' className='cursor-pointer rounded-sm hover:bg-slate-400  hover:text-black hover:duration-300 p-2  relative h-[45px] flex w-[74px]'>
+        <ReloadingLink to='/user/cart' className='cursor-pointer rounded-md hover:bg-slate-800 hover:duration-300 p-2  relative h-[45px] flex w-[74px]'>
             <ShoppingCart className='h-[20px] absolute top-2' />
             <span className='absolute left-8 bottom-[2px] font-bold pr-2'>Cart</span>
         </ReloadingLink>

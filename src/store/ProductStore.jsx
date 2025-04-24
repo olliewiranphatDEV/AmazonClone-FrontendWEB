@@ -18,7 +18,7 @@ const ProductStore = (set, get) => ({
     },
     actionsearchProductsDB: async (categoryID, search) => {
         const resSearchPD = await searchProducts(categoryID, search)
-        // console.log('resSearchPD', resSearchPD);
+        console.log('resSearchPD', resSearchPD);
         set({ searchProductsDB: resSearchPD.data.results, categoryID, search })
     },
     actionADDtoCarts: async (token, userID, product, pickQuantity) => {

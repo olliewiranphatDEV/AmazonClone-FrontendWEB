@@ -70,12 +70,6 @@ function MainSearchBar({ setBgFocus, setLoading }) {
             //EITHER FILL TEXT INPUT OR JUST SELECT CATEGOTY --> SEARCH IN DB + NAVIGATE('/search/related-products')
             await actionsearchProductsDB(categoryID, search); //KEEP DATA IN GLOBAL STATE
             setValue("search", ""); // CLEAR VALUE OF SEARCH WORD INPUT
-
-
-        } catch (error) {
-            console.log("Cannot Search Related-Products, ERROR", error);
-            renderAlert("Cannot add a new product!", "error")
-        } finally {
             setTimeout(() => {
                 setLoading(false)
                 const query = new URLSearchParams()
@@ -89,6 +83,11 @@ function MainSearchBar({ setBgFocus, setLoading }) {
                 }
                 navigate(`/search/related-products?${query.toString()}`); //NAV TO SEARCH-RELATED-PRODUCTS
             }, 900)
+
+        } catch (error) {
+            console.log("Cannot Search Related-Products, ERROR", error);
+            setLoading(false)
+            renderAlert("Cannot add a new product!", "error")
         }
 
     };
@@ -100,7 +99,7 @@ function MainSearchBar({ setBgFocus, setLoading }) {
             {/* Search Form */}
             <form
                 onSubmit={handleSubmit(hdlSubFormSearch)}
-                className="relative w-full h-[40px] flex items-center mt-2 bg-pink-400 rounded-[5px]"
+                className="relative w-full h-[40px] flex items-center mt-2 rounded-[5px]"
             >
                 {/* CATEGORIES "ALL" */}
                 <div className="relative">
@@ -110,7 +109,8 @@ function MainSearchBar({ setBgFocus, setLoading }) {
                         className="h-[40px] bg-[#e3e6e6] text-[11px] flex items-center justify-center rounded-l-[5px] pl-2 text-gray-600 hover:text-black hover:duration-300 hover:bg-gray-300"
                     >
                         {/* DEFAULT "ALL" */}
-                        <span className="truncate text-left account">{selectedCategoryName}</span>
+                        <div className="sm:hidden truncate text-left account">{selectedCategoryName.slice(0, 20)}</div>
+                        <span className="hidden sm:flex truncate text-left account">{selectedCategoryName}</span>
                         <ChevronDown className={`h-[12px] duration-300 ${showCate ? "rotate-180" : ""}`} />
                     </button>
                 </div>

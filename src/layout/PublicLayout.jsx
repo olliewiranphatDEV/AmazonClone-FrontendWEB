@@ -34,7 +34,7 @@ function PublicLayout() {
             </div>
 
             {/* MAIN CONTENT */}
-            <div className='flex-grow w-full relative pb-20'>
+            <div className='flex-grow w-full relative mb-20'>
                 <Outlet />
                 <CSSTransition
                     in={bgFocus}
@@ -64,7 +64,7 @@ function PublicLayout() {
                 {
                     loading && (<div style={{
                         width: "100%",
-                        height: "100%",
+                        height: "100vh",
                         backgroundColor: "rgba(206, 206, 206, 0.6)",
                         display: "flex",
                         flexDirection: "column",
