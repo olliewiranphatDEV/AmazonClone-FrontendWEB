@@ -23,14 +23,14 @@ function MainNavBar({ setBgFocus, setLoading }) {
             </ReloadingLink>
 
             {/* DELIVERY TO */}
-            <button className='hidden lg:flex items-center h-full' >
-                <button className='h-[80%] rounded-md hover:bg-slate-800 hover:duration-300 px-2 flex flex-col items-center justify-center'>
-                    <span className='text-[9px] account'>Deliver to {user?.firstName || ""}</span>
-                    <div className='flex items-center relative'>
-                        <MapPin className='h-[16px] absolute left-[-6px]' />
-                        <span className='text-[12px] font-bold pl-4'>Thailand</span>
-                    </div>
-                </button>
+            <button className='hidden lg:flex h-[80%] rounded-md hover:bg-slate-800 hover:duration-300 px-2  flex-col items-center justify-center' >
+
+                <span className='text-[9px] account'>Deliver to {user?.firstName || ""}</span>
+                <div className='flex items-center relative'>
+                    <MapPin className='h-[16px] absolute left-[-6px]' />
+                    <span className='text-[12px] font-bold pl-4'>Thailand</span>
+                </div>
+
             </button>
 
             {/* MAIN SEARCH BAR */}

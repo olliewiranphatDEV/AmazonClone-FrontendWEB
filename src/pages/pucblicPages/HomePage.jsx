@@ -52,7 +52,7 @@ function HomePage() {
 
 
     return (
-        <div className='relative'>
+        <div className='relative pb-20'>
 
             <div className='relative'>
                 <CustomCarousel slides={LandingData} />

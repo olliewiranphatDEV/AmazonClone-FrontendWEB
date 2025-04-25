@@ -34,7 +34,7 @@ function PublicLayout() {
             </div>
 
             {/* MAIN CONTENT */}
-            <div className='flex-grow w-full relative mb-20'>
+            <div className='flex-grow w-full relative'>
                 <Outlet />
                 <CSSTransition
                     in={bgFocus}

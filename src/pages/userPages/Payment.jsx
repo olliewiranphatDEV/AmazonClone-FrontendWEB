@@ -9,6 +9,7 @@ import {
 import { useAuth } from '@clerk/clerk-react';
 import { payment } from '../../api/user';
 import useCartStore from '../../store/CartStore';
+import { renderAlert } from '../../utils/renderAlert';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 // This is your test secret API key.
@@ -24,11 +25,17 @@ function Payment() {
     console.log('userCart', userCart); //Current Cart, Ready to order
 
     const fetchClientSecret = useCallback(async () => {
-        const token = await getToken()
-        const resPayment = await payment(token, userCart) //Create Session for Checkout from Server
-        console.log('resPayment', resPayment);
-        return resPayment.data.clientSecret //session Checkout
+        try {
+            const token = await getToken()
+            const resPayment = await payment(token, userCart) //Create Session for Checkout from Server
+            console.log('resPayment', resPayment);
+            return resPayment.data.clientSecret //session Checkout
+        } catch (error) {
+            console.log("Cannot Create SESSION Checkout, ERROR", error);
+            renderAlert("Cannot Create Payment Checkout!", "error")
+        }
     })
+
     //ฟังก์ชันนี้ถูก เรียกใช้จาก EmbeddedCheckoutProvider 
     // ในการกำหนด options ที่จะส่งต่อให้ EmbeddedCheckout
     // การดึง client secret จะเกิดขึ้นเมื่อหน้า Payment ถูกแสดงขึ้นมา 
@@ -43,6 +50,7 @@ function Payment() {
     // เมื่อชำระเงินสำเร็จ,return_url: `http://localhost:5173/user/payment/complete/{CHECKOUT_SESSION_ID}`, //= {CHECKOUT_SESSION_ID} : sessionID
     // Stripe จะส่ง webhook กลับมายัง Backend ของคุณเพื่อตรวจสอบและอัปเดตสถานะการจองหรือการชำระเงิน.
     return (
+
         <div id="checkout">
             <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
 

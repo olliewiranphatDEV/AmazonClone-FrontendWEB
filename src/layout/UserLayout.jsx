@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import MainNavBar from '../components/main/MainNavBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/main/Footer'
 import SecondNavBar from '../components/main/SecondNavBar'
 import UserSideBar from '../components/user/UserSideBar'
+import { CSSTransition } from 'react-transition-group';
 
 function UserLayout() {
 
@@ -30,8 +31,8 @@ function UserLayout() {
             <div className='sm:mt-[60px]'>
                 <SecondNavBar />
             </div>
-            <div className='flex-grow w-full relative flex pb-20'>
-                <div className='w-[200px]'>
+            <div className='flex-grow w-full relative flex'>
+                <div className='w-[200px] hidden lg:flex'>
                     <UserSideBar />
                 </div>
                 <div className='flex-1'>

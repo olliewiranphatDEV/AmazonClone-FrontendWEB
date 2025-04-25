@@ -10,10 +10,13 @@ import { CSSTransition } from 'react-transition-group';
 import { useForm } from 'react-hook-form';
 import ProductStockPopup from '../../components/main/search-bar/ProductStockPopup';
 import CallToAction from '../../components/main/search-bar/CallToAction';
+import { useAuth } from '@clerk/clerk-react';
 
 function ProductDetail() {
+    const { getToken } = useAuth()
     const { productID } = useParams()
     // console.log('productID', productID);
+    const actionADDtoCarts = useProductStore(state => state.actionADDtoCarts)
     const searchProductsDB = useProductStore(state => state.searchProductsDB)
     const thisProduct = searchProductsDB.find(el => el.productID == productID) || null
     if (!thisProduct) return <div className='p-6 text-red-500'>Product not found</div>
@@ -56,8 +59,23 @@ function ProductDetail() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    console.log('selectedQuantity', selectedQuantity);
 
+    const hdlAddToCart = async () => {
+        console.log('thisProduct', thisProduct);
+        console.log('selectedQuantity', selectedQuantity);
+        try {
+            const token = await getToken()
+            await actionADDtoCarts(token, thisProduct, selectedQuantity)
+        } catch (error) {
+            console.log("Cannot add product to cart, ERROR", error);
+
+        }
+
+
+    }
+
+    const carts = useProductStore(state => state.carts)
+    console.log('carts', carts);
 
 
     return (
@@ -139,7 +157,7 @@ function ProductDetail() {
                             </CSSTransition>
                         </div>
                         {/* ADD TO CART - KEEP DATA IN DATABASE + SHOW ON CART.JSX*/}
-                        <CallToAction />
+                        <CallToAction hdlAddToCart={hdlAddToCart} />
                     </div>
                 </div>
             </div>

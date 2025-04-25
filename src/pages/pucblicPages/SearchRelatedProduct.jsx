@@ -12,12 +12,12 @@ function SearchRelatedProduct() {
     //GET CATEGORYID && SEARCH WORD
     const categoryID = queryParams.get("categoryID") || ""
     const searchWord = queryParams.get("search") || ""
-    console.log('categoryID', categoryID);
-    console.log('searchWord', searchWord);
+    // console.log('categoryID', categoryID);
+    // console.log('searchWord', searchWord);
 
     //SEARCHED PRODUCTS (BACKEND -> GLOBAL STATE)
     const searchProductsDB = useProductStore(state => state.searchProductsDB)
-    console.log('searchProductsDB', searchProductsDB);
+    // console.log('searchProductsDB', searchProductsDB);
 
     //GET CATEGORY NAME TO RENDER DYNAMICALLY
     const { allCategories } = useCategoryStore()

@@ -11,7 +11,7 @@ function UserSideBar() {
     console.log('role', role);
 
     return (
-        < div className='w-full h-full bg-[#131921] text-white flex flex-col items-center ' >
+        < div className='w-full min-h-screen bg-[#131921] text-white flex flex-col items-center ' >
             {/* User Picture */}
             <UserPicSB />
 

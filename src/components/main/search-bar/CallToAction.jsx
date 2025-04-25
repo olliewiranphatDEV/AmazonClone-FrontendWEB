@@ -1,10 +1,8 @@
 import { SignInButton, useAuth } from '@clerk/clerk-react'
 import React from 'react'
 
-function CallToAction() {
+function CallToAction({ hdlAddToCart }) {
     const { userId } = useAuth()
-
-
     if (!userId) {
         return (
             <div className='flex flex-col gap-3'>
@@ -25,9 +23,14 @@ function CallToAction() {
             </div>
         )
     }
+
+
+
+
+
     return (
         <div className='flex flex-col gap-3'>
-            <button
+            <button onClick={hdlAddToCart}
                 className='w-full bg-[#FFD814] rounded-full py-1 hover:bg-amber-400 hover:duration-300'
             >
                 Add to Cart

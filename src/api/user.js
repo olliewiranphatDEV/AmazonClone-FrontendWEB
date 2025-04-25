@@ -40,27 +40,37 @@ export const deleteUserAccount = async (token) => {
 }
 
 
-export const ADDtoCart = async (token, userID, cart) => {
-    return await axios.post(`${BASE_URL}/user/add-to-cart/${userID}`, { cart }, {
+export const ADDtoCart = async (token, cart) => {
+    return await axios.post(`${BASE_URL}/user/add-to-cart`,
+        { cart },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+}
+
+export const cartUpdateQuantity = async (token, data) => {
+    return await axios.patch(`${BASE_URL}/user/cart/update-quantity`, data, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
 }
 
-export const cartUpdateQuantity = async (token, userID, data) => {
-    return await axios.patch(`${BASE_URL}/user/cart/update-quantity/${userID}`, data, {
+
+
+
+export const getUserCartAPI = async (token) => {
+    return await axios(`${BASE_URL}/user/cart`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
 }
 
-
-
-
-export const GETUserCart = async (token, userID) => {
-    return await axios(`${BASE_URL}/user/cart/${userID}`, {
+export const deleteCartItemAPI = async (token) => {
+    return await axios.delete(`${BASE_URL}/user/cart/delete-all-cart-items`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
