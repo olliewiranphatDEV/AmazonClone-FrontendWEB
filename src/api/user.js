@@ -77,13 +77,17 @@ export const deleteCartItemAPI = async (token) => {
     })
 }
 
-export const payment = async (token, userCart) => {
-    return await axios.post(`${BASE_URL}/user/payment/checkout/`, { userCart }, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
+
+export const payment = async (token, data) => {
+    return await axios.post(`${BASE_URL}/user/payment/checkout`,
+        data,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
 }
+
 
 
 export const checkOutStatus = async (token, session, userID) => {

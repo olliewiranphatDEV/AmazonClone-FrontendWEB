@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import useCartStore from '../../store/CartStore'
 import useAuthStore from '../../store/UserStore'
-import { useAuth } from '@clerk/clerk-react'
+import { useAuth, useUser } from '@clerk/clerk-react'
 import { cartUpdateQuantity } from '../../api/user'
 import ReloadingLink from '../../components/ReloadingLink'
+import { useNavigate } from 'react-router'
 
 function Cart() {
+    const navigate = useNavigate()
     const { getToken } = useAuth()
+
+
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
@@ -27,6 +31,8 @@ function Cart() {
         const fetch = async () => {
             try {
                 const token = await getToken()
+                // console.log('token', token);
+
                 setTokenFunction(() => getToken)
                 await actionGetUserCart(token)
                 setIsError(false)
@@ -79,6 +85,10 @@ function Cart() {
             </div>
         </div>
     )
+
+
+
+
 
     return (
         <div className='min-h-screen bg-gray-100 px-4 sm:px-20 pt-10 pb-20'>
@@ -143,7 +153,7 @@ function Cart() {
                                         <img
                                             src={ProductImage?.[0]?.secure_url}
                                             alt={productName}
-                                            className='w-full sm:w-24 h-24 object-cover rounded-sm mx-auto sm:mx-0'
+                                            className='w-full sm:w-24 h-full object-cover rounded-sm mx-auto sm:mx-0'
                                         />
                                         <div className='flex-1 flex flex-col justify-between text-center sm:text-left'>
                                             <div>
