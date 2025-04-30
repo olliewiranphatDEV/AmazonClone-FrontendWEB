@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 
 function UserAccount({ checkRole }) {
     const { getToken } = useAuth()
-    ///// Zustand : 
+
     const actionGetMyAccount = useAuthStore(state => state.actionGetMyAccount)
     useEffect(() => {
         const fetchData = async () => {
