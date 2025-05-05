@@ -69,13 +69,13 @@ export const getUserCartAPI = async (token) => {
     })
 }
 
-export const deleteCartItemAPI = async (token) => {
-    return await axios.delete(`${BASE_URL}/user/cart/delete-all-cart-items`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+export const deleteCartItemAPI = async (token, data) => {
+    return await axios.delete(`${BASE_URL}/user/cart/delete-checked`, {
+        headers: { Authorization: `Bearer ${token}` },
+        data // ส่งเป็น object ที่มี selectedProductIDs
+    });
+};
+
 
 
 export const payment = async (token, data) => {

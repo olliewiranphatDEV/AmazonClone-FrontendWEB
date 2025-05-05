@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useCartStore from '../../store/CartStore'
 import useAuthStore from '../../store/UserStore'
 import { useAuth, useUser } from '@clerk/clerk-react'
 import { cartUpdateQuantity } from '../../api/user'
 import ReloadingLink from '../../components/ReloadingLink'
 import { useNavigate } from 'react-router'
+import { renderAlert } from '../../utils/renderAlert'
+import { CSSTransition } from 'react-transition-group';
 
 function Cart() {
     const navigate = useNavigate()
@@ -13,6 +15,10 @@ function Cart() {
 
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
+
+
+    const [bgFocus, setBgFocus] = useState(false)
+    const overlayRef = useRef(null) //useRef with CSSTransition
 
     const {
         userCart,
@@ -61,8 +67,17 @@ function Cart() {
     }
 
     const hdlDeleteChecked = async () => {
-        const token = await getToken()
-        await deleteCheckedItems(token)
+        console.log('checkedItems', checkedItems);
+        setBgFocus(true)
+        try {
+            const token = await getToken()
+            await deleteCheckedItems(token);
+        } catch (error) {
+            console.log("Cannot Delete CheckedItems, ERROR", error);
+            renderAlert("Cannot Delete CheckedItems", error)
+        } finally {
+            setBgFocus(false)
+        }
     }
 
     const isAllChecked = () => {
@@ -203,6 +218,50 @@ function Cart() {
             ) : (
                 <p className='text-gray-600 text-center'>Your cart is empty.</p>
             )}
+            <CSSTransition
+                in={bgFocus}
+                timeout={90}
+                classNames={{
+                    enter: 'opacity-0 scale-95',
+                    enterActive: 'opacity-100 scale-100 transition duration-200 ease-in',
+                    exit: 'opacity-100 scale-100',
+                    exitActive: 'opacity-0 scale-95 transition duration-200 ease-in'
+                }}
+                unmountOnExit
+                nodeRef={overlayRef}
+            >
+                <div
+                    ref={overlayRef}
+                    onClick={() => setBgFocus(false)}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0,0, 0, 0.5)",
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        zIndex: "10",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <svg
+                        className='w-[10%] absolute top-[7%] animate-spin'
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#c2c2c2"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier"> <path d="M21 12a9 9 0 11-6.219-8.56"></path> </g>
+                    </svg>
+                </div>
+            </CSSTransition>
         </div>
     )
 }

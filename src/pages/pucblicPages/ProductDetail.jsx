@@ -4,20 +4,25 @@ import useProductStore from '../../store/ProductStore';
 import AddToCart from '../../components/main/orderhistory/AddToCart';
 import BuyNow from '../../components/main/orderhistory/BuyNow';
 import ImagesProductGallery from '../../components/main/search-bar/ImagesProductGallery';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader, LoaderCircle } from 'lucide-react';
 import CategoriesPopup from '../../components/main/search-bar/CategoriesPopup';
 import { CSSTransition } from 'react-transition-group';
 import { useForm } from 'react-hook-form';
 import ProductStockPopup from '../../components/main/search-bar/ProductStockPopup';
 import CallToAction from '../../components/main/search-bar/CallToAction';
 import { useAuth } from '@clerk/clerk-react';
+import useCartStore from '../../store/CartStore';
 
 function ProductDetail() {
+    const [bgFocus, setBgFocus] = useState(false)
+    const overlayRef = useRef(null) //useRef with CSSTransition
+
     const { getToken } = useAuth()
     const { productID } = useParams()
     // console.log('productID', productID);
     const actionADDtoCarts = useProductStore(state => state.actionADDtoCarts)
     const searchProductsDB = useProductStore(state => state.searchProductsDB)
+    const actionGetUserCart = useCartStore(state => state.actionGetUserCart)
     const thisProduct = searchProductsDB.find(el => el.productID == productID) || null
     if (!thisProduct) return <div className='p-6 text-red-500'>Product not found</div>
     // console.log('thisProduct', thisProduct);
@@ -61,14 +66,18 @@ function ProductDetail() {
 
 
     const hdlAddToCart = async () => {
+        setBgFocus(true)
         console.log('thisProduct', thisProduct);
         console.log('selectedQuantity', selectedQuantity);
         try {
             const token = await getToken()
             await actionADDtoCarts(token, thisProduct, selectedQuantity)
+            actionGetUserCart(token)
         } catch (error) {
             console.log("Cannot add product to cart, ERROR", error);
 
+        } finally {
+            setBgFocus(false)
         }
 
 
@@ -79,7 +88,7 @@ function ProductDetail() {
 
 
     return (
-        <div className='w-full gap-5 px-6 py-10 flex flex-wrap lg:flex-nowrap justify-center'>
+        <div className='w-full gap-5 px-6 py-10 flex flex-wrap lg:flex-nowrap justify-center mb-20'>
             {/* PRODUCT IMAGES */}
             <ImagesProductGallery ProductImage={thisProduct?.ProductImage} />
 
@@ -161,6 +170,50 @@ function ProductDetail() {
                     </div>
                 </div>
             </div>
+            <CSSTransition
+                in={bgFocus}
+                timeout={90}
+                classNames={{
+                    enter: 'opacity-0 scale-95',
+                    enterActive: 'opacity-100 scale-100 transition duration-200 ease-in',
+                    exit: 'opacity-100 scale-100',
+                    exitActive: 'opacity-0 scale-95 transition duration-200 ease-in'
+                }}
+                unmountOnExit
+                nodeRef={overlayRef}
+            >
+                <div
+                    ref={overlayRef}
+                    onClick={() => setBgFocus(false)}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0,0, 0, 0.5)",
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        zIndex: "10",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <svg
+                        className='w-[10%] absolute top-[7%] animate-spin'
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#c2c2c2"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier"> <path d="M21 12a9 9 0 11-6.219-8.56"></path> </g>
+                    </svg>
+                </div>
+            </CSSTransition>
         </div>
     )
 }

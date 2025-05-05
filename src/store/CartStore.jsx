@@ -56,20 +56,16 @@ const useCartStore = create((set, get) => ({
 
     // ❌ Delete checked items
     deleteCheckedItems: async (token) => {
-        const { userCart, checkedItems } = get()
-        const deletePromises = []
+        const { checkedItems } = get()
 
-        userCart.forEach(cart => {
-            cart.ProductOnCart.forEach(item => {
-                if (checkedItems[item.productID]) {
-                    deletePromises.push(
-                        deleteCartItemAPI(token, cart.cartID, item.productID)
-                    )
-                }
-            })
-        })
+        // กรองเอาเฉพาะ productID ที่ถูกเลือก (true)
+        const selectedProductIDs = Object.entries(checkedItems)
+            .filter(([_, isChecked]) => isChecked)
+            .map(([id]) => Number(id)) // แปลง key (string) เป็น number
 
-        await Promise.all(deletePromises)
+        console.log("IDs to delete >>>", selectedProductIDs)
+
+        await deleteCartItemAPI(token, { selectedProductIDs })
         await get().actionGetUserCart(token)
     },
 

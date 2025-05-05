@@ -8,7 +8,8 @@ function CallToAction({ hdlAddToCart }) {
             <div className='flex flex-col gap-3'>
 
                 <SignInButton mode='modal'>
-                    <button className='w-full bg-[#FFD814] rounded-full py-1 hover:bg-amber-400 hover:duration-300'>
+                    <button
+                        className='w-full bg-[#FFD814] rounded-full py-1 hover:bg-amber-400 hover:duration-300'>
                         Add to Cart
                     </button>
                 </SignInButton>

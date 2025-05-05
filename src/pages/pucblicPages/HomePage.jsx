@@ -7,6 +7,7 @@ import CustomCarousel from '../../components/carousel/CustomCarousel'
 import LandingData from '../../data/LandingCarousel'
 import CardInCarosel from '../../components/home/CardInCarosel'
 import CardComponentSECOND from '../../components/home/CardComponentSECOND'
+import useCartStore from '../../store/CartStore'
 
 
 
@@ -19,11 +20,13 @@ function HomePage() {
 
     const { actionGetAllCate } = useCategoryStore()
     const { actionGetAllProductsDB, triggerReload } = useProductStore()
+    const { actionGetUserCart } = useCartStore()
     useEffect(() => {
         const fetchUserAccount = async () => {
             try {
                 const token = await getToken()
                 actionGetMyAccount(token)
+                actionGetUserCart(token)
             } catch (error) {
                 console.log("ERROR, fetchUseraccount", error);
 
