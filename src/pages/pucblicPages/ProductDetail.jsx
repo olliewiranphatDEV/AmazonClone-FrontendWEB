@@ -72,7 +72,7 @@ function ProductDetail() {
         try {
             const token = await getToken()
             await actionADDtoCarts(token, thisProduct, selectedQuantity)
-            actionGetUserCart(token)
+            await actionGetUserCart(token)
         } catch (error) {
             console.log("Cannot add product to cart, ERROR", error);
 
