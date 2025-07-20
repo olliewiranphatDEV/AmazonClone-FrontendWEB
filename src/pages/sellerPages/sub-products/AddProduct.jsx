@@ -13,10 +13,10 @@ function AddProduct() {
     const allCategories = useCategoryStore(state => state.allCategories)
     // console.log('allCategories', allCategories);
     //SELECT CATEGORIES:
-    const renderAllCategories = allCategories.map(el => {
-        // console.log('el.name', el.name);
-        return (<option value={el.categoryID} key={el.categoryID}>{el.name}</option>)
-    })
+    const renderAllCategories = allCategories?.map(el => (
+        <option value={el.categoryID} key={el.categoryID}>{el.name}</option>
+    )) ?? []
+
 
 
     const [imageData, setImageData] = useState([])

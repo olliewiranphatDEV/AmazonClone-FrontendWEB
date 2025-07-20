@@ -19,7 +19,6 @@ function AdminSideBar() {
                 </div>
                 <ul className='pl-14 flex flex-col gap-3 mt-4 mb-2 text-[11px]'>
                     <ReloadingLink to='/admin-center/management/all-categories' className='block pb-1 w-[70px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Categories</ReloadingLink>
-                    <ReloadingLink to='/admin-center/management/all-customers' className='block pb-1 w-[71px] cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Customers</ReloadingLink>
                     <ReloadingLink to='/admin-center/management/all-sellers' className='w-[50px] pb-1 cursor-pointer border-transparent hover:border-b-2  hover:border-slate-400 hover:duration-200'>All Sellers</ReloadingLink>
                 </ul>
             </div>

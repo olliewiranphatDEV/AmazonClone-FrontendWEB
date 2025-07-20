@@ -19,10 +19,10 @@ function AllSellers() {
     console.log('allSellers', allSellers);
 
     return (
-        <div className='w-full p-2 flex flex-col flex-wrap h-full gap-2'>
-            <span span className='account font-bold text-[18px] pl-4' > All Categories</span >
+        <div className='w-full py-8 px-4 flex flex-col flex-wrap h-full gap-2'>
+            <span span className='account font-bold text-[18px] pl-4' > All Sellers</span >
 
-            <div className='w-full m-auto mt-4 border border-gray-400 rounded-md'>
+            <div className='w-[90%] m-auto mt-4 border border-gray-400 rounded-md'>
                 <div className='flex w-full text-[12px] font-semibold border-gray-400 border-b-[1px] pb-2'>
                     <div className='w-[5%] text-center'>ID</div>
                     <div className='w-[5%] text-center'>Image</div>
@@ -31,8 +31,8 @@ function AllSellers() {
                     <div className='w-[15%] mx-3 text-center'>Email</div>
                     <div className='w-[15%]  text-center'>Address</div>
                     <div className='w-[15%] text-center'>Phone Number</div>
-                    <div className='w-[55px] bg-gray-400 text-center'>Status</div>
-                    <div className='bg-gray-300 w-[30px] text-center'>Create At</div>
+                    <div className='w-[55px] text-center'>Status</div>
+                    <div className='flex-1 text-center'>Create At</div>
                 </div>
                 {
                     allSellers.map(el => (<SellerItem key={el.userID} el={el} />))

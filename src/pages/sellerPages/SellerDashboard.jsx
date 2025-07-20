@@ -13,10 +13,13 @@ import CustomerRating from '../../components/seller/dashboard/CustomerRating'
 function SellerDashboard() {
     const { getToken } = useAuth()
     const userData = useAuthStore(state => state.userData)
-    const { userID } = userData
+    const userID = userData?.userID ?? null
+
 
     const actionGetSellerDashboard = useSellerStore(state => state.actionGetSellerDashboard)
     useEffect(() => {
+        if (!userID) return;
+
         const fetchData = async () => {
             const token = await getToken()
             actionGetSellerDashboard(token, userID)

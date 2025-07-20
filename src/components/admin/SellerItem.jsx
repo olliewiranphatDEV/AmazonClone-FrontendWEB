@@ -14,8 +14,15 @@ function SellerItem({ el }) {
             <div className='w-[15%] mx-3' >{el.email}</div>
             <div className='w-[15%] text-center'>{el.address}</div>
             <div className='w-[15%] text-center'>{el.phoneNumber}</div>
-            <div className='w-[55px] text-center bg-slate-300'>{el.userStatus}</div>
-            <div className=' text-center'>{el.createdAt}</div>
+            <div className='w-[55px] text-center'>{el.userStatus}</div>
+            <div className='flex-1 text-center'>
+                {new Date(el.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                })}
+            </div>
+
         </div>
     )
 }

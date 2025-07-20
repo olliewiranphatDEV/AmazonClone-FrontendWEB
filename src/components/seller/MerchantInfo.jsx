@@ -12,7 +12,8 @@ function MerchantInfo() {
     const { getToken } = useAuth()
     //CREATE STATE FOR EDITING THE MERCHANT NAME 
     const [editMerchantName, setEditMerchantName] = useState(false)
-    const [merchantName, setMerchantName] = useState(userData.merchantName || "New Merchant ") //FOR DEFAULT VALUE INPUT
+    const [merchantName, setMerchantName] = useState(userData?.merchantName || "New Merchant")
+
     const [loading, setLoading] = useState(false)
     const inputRef = useRef(null)
 
@@ -59,6 +60,13 @@ function MerchantInfo() {
         }
     }
     // console.log('merchantName >>', merchantName);
+
+    if (!userData) {
+        return (
+            <div className="text-center text-sm text-gray-400 py-10">Loading merchant info...</div>
+        )
+    }
+
 
     return (
         <div className='flex items-center justify-between xl:justify-end gap-10 w-full xl:w-[50%] account text-[14px] text-[#131921]'>

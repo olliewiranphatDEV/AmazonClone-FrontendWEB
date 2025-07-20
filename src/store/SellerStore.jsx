@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { getMyProducts } from "../api/product"
 import { persist } from "zustand/middleware";
-import { accordionActionsClasses } from "@mui/material";
 import { getDashboard } from "../api/seller";
 
 const SellerStore = (set) => ({
     sellerDashboard: null,
-    myProducts: null,
+    myProducts: [],
     actionGetMyProducts: async (token) => {
         const myProducts = await getMyProducts(token)
         // console.log('myProducts', myProducts);

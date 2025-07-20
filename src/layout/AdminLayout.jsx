@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import MainNavBar from '../components/main/MainNavBar'
 import SecondNavBar from '../components/main/SecondNavBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/main/Footer'
 import AdminSideBar from '../components/admin/AdminSideBar'
+import { CSSTransition } from 'react-transition-group'
+
 
 function AdminLayout() {
     const [loading, setLoading] = useState()
@@ -33,7 +35,7 @@ function AdminLayout() {
                 <SecondNavBar />
             </div>
 
-            <div className='flex-grow w-full relative pb-20 flex'>
+            <div className='flex-grow w-full relative flex'>
                 <div className='w-[200px]'>
                     <AdminSideBar />
                 </div>

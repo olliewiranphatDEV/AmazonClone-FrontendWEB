@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MainNavBar from '../components/main/MainNavBar'
+import SecondNavBar from '../components/main/SecondNavBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/main/Footer'
 import SellerSideBar from '../components/seller/SellerSideBar'
@@ -30,13 +31,14 @@ function SellerLayout() {
                 <SecondNavBar />
             </div>
 
-            <div className='flex-grow w-full relative pb-20 flex'>
-                <div className='w-[200px]'>
-                    <SellerSideBar />
-                </div>
+            <div className='flex-grow w-full relative flex'>
+
+                <SellerSideBar />
+
                 <div className='flex-1'>
                     <Outlet />
                 </div>
+
 
                 <CSSTransition
                     in={bgFocus}
@@ -85,8 +87,8 @@ function SellerLayout() {
                     </div>)
                 }
             </div>
-
             <Footer />
+
         </div>
     );
 }

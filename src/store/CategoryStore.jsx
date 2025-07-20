@@ -4,7 +4,7 @@ import { getAllCategories } from "../api/category"
 
 
 const CategoryStore = (set) => ({
-    allCategories: null,
+    allCategories: [],
     actionGetAllCate: async () => {
         const allcates = await getAllCategories()
         // console.log('allcates', allcates);

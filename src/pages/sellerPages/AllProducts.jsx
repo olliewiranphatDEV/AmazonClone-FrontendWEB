@@ -14,11 +14,14 @@ function AllProducts() {
     const [loading, setLoading] = useState(false)
     const userData = useAuthStore(state => state.userData)
     // console.log('userID', userData.userID);
-    const { userID } = userData
+    const userID = userData?.userID ?? null
+
     const { getToken } = useAuth()
     const actionGetMyProducts = useSellerStore(state => state.actionGetMyProducts)
 
-    useEffect(() => { //ห้ามใช้ async ตรงนี้, useEffect ไม่ควรคืนเป็น promise
+    useEffect(() => {
+        if (!userID) return; // // หยุดถ้า userID ยังไม่มา
+
         const fetchData = async () => { // ย้าย async function ไปอยู่ภายใน useEffect
             const token = await getToken();
             actionGetMyProducts(token);
@@ -57,7 +60,8 @@ function AllProducts() {
 
                 <div className='border-t-[2px] border-gray-300 py-2'>
                     {
-                        myProducts.length !== 0 ? (<ProductList myProducts={myProducts} setLoading={setLoading} />)
+                        myProducts?.length !== 0 ?
+                            (<ProductList myProducts={myProducts} setLoading={setLoading} />)
                             : (<div className='w-full text-gray-500 text-[10px] md:text-[14px] flex flex-col gap-4 items-center py-20'>
                                 <span>Hi, Seller! You no have any products yet.</span>
                                 <span>Please add your new products for more Traffic!</span>
